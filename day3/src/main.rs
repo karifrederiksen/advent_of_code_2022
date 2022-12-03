@@ -18,21 +18,20 @@ fn parse(s: &str) -> Input {
         .collect()
 }
 
-fn common_items(comp_a: &[u8], comp_b: &[u8]) -> Vec<u8> {
-    let mut vals_a = [0u8; 52];
+fn intersection(comp_a: &[u8], comp_b: &[u8]) -> Vec<u8> {
+    let mut vals = [0u8; 53];
     for &a in comp_a {
-        vals_a[(a - 1) as usize] += 1;
+        vals[a as usize] = 1u8;
     }
-
-    let mut vals_b = [0u8; 52];
     for &b in comp_b {
-        vals_b[(b - 1) as usize] += 1;
+        if vals[b as usize] == 1 {
+            vals[b as usize] = 2u8;
+        }
     }
-
     let mut res = Vec::new();
-    for i in 0..52 {
-        if vals_a[i] > 0 && vals_b[i] > 0 {
-            res.push((i as u8) + 1)
+    for i in 1..=52 {
+        if vals[i] == 2 {
+            res.push(i as u8)
         }
     }
     res
@@ -43,7 +42,7 @@ fn answer_part1(inputs: &Input) -> usize {
         .iter()
         .map(|line| {
             let i = line.len() / 2;
-            common_items(&line[..i], &line[i..])
+            intersection(&line[..i], &line[i..])
                 .into_iter()
                 .map(|n| n as u32)
                 .sum::<u32>()
@@ -59,7 +58,7 @@ fn answer_part2(inputs: &Input) -> usize {
     groups
         .into_iter()
         .map(|[a, b, c]| {
-            common_items(&common_items(a, b), c)
+            intersection(&intersection(a, b), c)
                 .into_iter()
                 .map(|n| n as u32)
                 .sum::<u32>()
