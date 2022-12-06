@@ -89,11 +89,29 @@ mod tests {
             answer_part1(&parse("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"))
         );
     }
-    // #[test]
-    // fn _part2() {
-    //     let inputs = parse(EXAMPLE_INPUT);
-    //     assert_eq!(0, answer_part2(&inputs));
-    // }
+    #[test]
+    fn _part2() {
+        assert_eq!(
+            Some(19),
+            answer_part2(&parse("mjqjpqmgbljsphdztnvjfqwrcgsmlb"))
+        );
+        assert_eq!(
+            Some(23),
+            answer_part2(&parse("bvwbjplbgvbhsrlpgdmjqwftvncz"))
+        );
+        assert_eq!(
+            Some(23),
+            answer_part2(&parse("nppdvjthqldpwncqszvftbrmjlhg"))
+        );
+        assert_eq!(
+            Some(29),
+            answer_part2(&parse("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"))
+        );
+        assert_eq!(
+            Some(26),
+            answer_part2(&parse("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"))
+        );
+    }
 
     #[bench]
     fn bench_parse(b: &mut test::Bencher) {
@@ -111,11 +129,11 @@ mod tests {
         });
     }
 
-    // #[bench]
-    // fn bench_answer_part2(b: &mut test::Bencher) {
-    //     let inputs = parse(include_str!("inputs"));
-    //     b.iter(|| {
-    //         test::black_box(answer_part2(&inputs));
-    //     });
-    // }
+    #[bench]
+    fn bench_answer_part2(b: &mut test::Bencher) {
+        let inputs = parse(include_str!("inputs"));
+        b.iter(|| {
+            test::black_box(answer_part2(&inputs));
+        });
+    }
 }
