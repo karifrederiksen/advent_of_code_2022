@@ -34,15 +34,12 @@ fn parse(s: &str) -> Input {
 fn is_visible(input: &Input, x: usize, y: usize) -> bool {
     let n = input.size(x, y);
     let row = &input.buf[(input.width * y)..(input.width * (y + 1))];
-    let left = *row[..x].iter().max().unwrap();
-    let right = *row[(x + 1)..].iter().max().unwrap();
-    let top = (0..y).map(|y| input.size(x, y)).max().unwrap();
-    let bottom = ((y + 1)..input.height)
-        .map(|y| input.size(x, y))
-        .max()
-        .unwrap();
+    let left = row[..x].iter().all(|m| *m < n);
+    let right = row[(x + 1)..].iter().all(|m| *m < n);
+    let top = (0..y).all(|y| input.size(x, y) < n);
+    let bottom = ((y + 1)..input.height).all(|y| input.size(x, y) < n);
 
-    n > left || n > right || n > top || n > bottom
+    left || right || top || bottom
 }
 
 fn answer_part1(inputs: &Input) -> usize {
