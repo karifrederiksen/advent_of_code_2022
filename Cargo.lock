@@ -9,8 +9,21 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3d62b7694a562cdf5a74227903507c56ab2cc8bdd1f781ed5cb4cf9c9f810bfc"
 
 [[package]]
+name = "assert-str"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6eff46575e86b852295e41df8599e94a910b1136c6af2821df9925f3cf8a1389"
+
+[[package]]
 name = "day1"
 version = "0.1.0"
+
+[[package]]
+name = "day10"
+version = "0.1.0"
+dependencies = [
+ "assert-str",
+]
 
 [[package]]
 name = "day2"
